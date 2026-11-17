@@ -1,0 +1,49 @@
+/* onetake-deck: the engine's structural CSS, loaded after the theme, camera-rig and carry CSS.
+   The deck's own look (grounds, type, the sample slides) lives in index.html. Read by onetake-deck.js. */
+
+/* Salesforce Sans Light for ledes and stat labels (the theme itself ships 400, 600 and 700; the file is
+   in the packed sfc/assets/fonts/). */
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("sfc/assets/fonts/SalesforceSans-Light.woff") format("woff");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000B2E; overflow: hidden; }
+
+/* A PDF page is one 1920 x 1080 region at its final frame. Backgrounds print as they look on screen. */
+@page { size: 1920px 1080px; margin: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* The deck frame: 1920 x 1080, scaled to the window by one transform (fit() in the engine). Never a
+   z-index here: it would trap the stacking of everything inside, and the components' own too. */
+.frame { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; }
+#view { position: absolute; inset: 0; }
+
+/* The grounds stay in screen space while the world moves. Each slide's ground class lands on its own
+   layer; the layers fade into each other during a seam. */
+#grounds, .ground { position: absolute; inset: 0; }
+.ground { background-color: var(--sfc-bg); }
+
+/* The camera. The rig fills the frame; the world is pinned at (0, 0) so camera-rig's math is plain. */
+#rig { position: absolute; inset: 0; display: block; background: none; overflow: hidden; }
+#rig > .sfc-stage { position: absolute; left: 0; top: 0; }
+/* A slide is a 1920 x 1080 region of the world. overflow stays visible: a carried box flies in from the
+   previous region, and its section must not clip it. */
+#world > .slide { position: absolute; width: 1920px; height: 1080px; overflow: visible; }
+
+/* Screen-space HUD. */
+.hud-bar { position: absolute; top: 0; left: 0; height: 4px; width: 0; background: var(--sfc-accent); transition: width 0.45s cubic-bezier(.2, .7, .2, 1); }
+html[data-sfc-medium="print"] .hud-bar { display: none; }
+
+/* The reduced-motion crossfade: a frozen copy of the outgoing frame fades over the new one. */
+.xfade { position: absolute; inset: 0; pointer-events: none; }
+/* Nothing shows until fonts and images are in and the take is built (no flash of the whole world). */
+.frame:not(.ready) #rig { visibility: hidden; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-bar { transition: none; }
+}

@@ -1,0 +1,97 @@
+/* compare-slider: reads only --sfc-* theme variables. One variable moves: --sfc-cmp-pos, the divider's place from
+   the left. The after pane sits in a wrapper whose left edge follows it, so the panes never fade or clip their text
+   with a clip-path. Without JS (or in print) the divider rests at the middle and both states show. */
+
+[data-sfc="compare-slider"] {
+  box-sizing: border-box;
+  width: min(100%, 880px);
+  color: var(--sfc-ink);
+  font: 400 clamp(14px, 1.25vw, 17px) / 1.4 var(--sfc-font-body);
+}
+
+[data-sfc="compare-slider"] .sfc-cmp-frame {
+  --sfc-cmp-pos: 50%;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--sfc-radius);
+  box-shadow: var(--sfc-shadow);
+  container-type: inline-size;
+}
+
+/* Both panes fill the frame; the after pane is pinned to the frame's right, inside a wrapper cut at the divider. */
+[data-sfc="compare-slider"] .sfc-cmp-pane { position: absolute; top: 0; bottom: 0; width: 100cqw; }
+[data-sfc="compare-slider"] .sfc-cmp-before { left: 0; background: var(--sfc-surface); }
+[data-sfc="compare-slider"] .sfc-cmp-reveal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: var(--sfc-cmp-pos);
+  overflow: hidden;
+}
+[data-sfc="compare-slider"] .sfc-cmp-after { right: 0; background: var(--sfc-bg); }
+[data-sfc="compare-slider"] .sfc-cmp-shot { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* A drawn screen: a title, a subtitle and label/value rows, inside its own side of the rest position, so at rest
+   each half reads whole (labels and values together). The after pane still fills the frame behind it. */
+[data-sfc="compare-slider"] .sfc-cmp-screen {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  padding: 3.4em 2.2em 2em;
+}
+[data-sfc="compare-slider"] .sfc-cmp-before .sfc-cmp-screen { width: var(--sfc-cmp-rest, 50%); }
+[data-sfc="compare-slider"] .sfc-cmp-after .sfc-cmp-screen { margin-left: var(--sfc-cmp-rest, 50%); }
+[data-sfc="compare-slider"] .sfc-cmp-title { font: 600 1.3em / 1.2 var(--sfc-font-body); }
+[data-sfc="compare-slider"] .sfc-cmp-subtitle { color: var(--sfc-ink-muted); }
+[data-sfc="compare-slider"] .sfc-cmp-rows { margin: 0.9em 0 0; display: grid; gap: 0.55em; }
+[data-sfc="compare-slider"] .sfc-cmp-row { display: flex; justify-content: space-between; gap: 1.5em; padding: 0.55em 0.8em; background: var(--sfc-bg); border-radius: 10px; }
+[data-sfc="compare-slider"] .sfc-cmp-after .sfc-cmp-row { background: var(--sfc-surface); }
+[data-sfc="compare-slider"] .sfc-cmp-row dt { color: var(--sfc-ink-muted); }
+[data-sfc="compare-slider"] .sfc-cmp-row dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+[data-sfc="compare-slider"] .sfc-cmp-dot { display: inline-block; width: 0.55em; height: 0.55em; margin-right: 0.45em; border-radius: 50%; vertical-align: 0.08em; }
+[data-sfc="compare-slider"] dd[data-status="good"] .sfc-cmp-dot { background: var(--sfc-good); }
+[data-sfc="compare-slider"] dd[data-status="warn"] .sfc-cmp-dot { background: var(--sfc-warn); }
+
+/* The divider and its handle. */
+[data-sfc="compare-slider"] .sfc-cmp-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--sfc-cmp-pos);
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--sfc-accent);
+  z-index: 2;
+}
+[data-sfc="compare-slider"] .sfc-cmp-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.8em;
+  height: 2.8em;
+  margin: -1.4em 0 0 -1.4em;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sfc-accent);
+  color: var(--sfc-bg);
+}
+[data-sfc="compare-slider"] .sfc-cmp-handle svg { width: 60%; height: 60%; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* The two tags: opaque plates in the top corners, always in place. */
+[data-sfc="compare-slider"] .sfc-cmp-tag {
+  position: absolute;
+  top: 1em;
+  z-index: 3;
+  padding: 0.3em 0.85em;
+  border-radius: 999px;
+  background: var(--sfc-bg);
+  border: 1px solid var(--sfc-surface-border);
+  font-size: 0.85em;
+  font-weight: 600;
+}
+[data-sfc="compare-slider"] .sfc-cmp-tag-before { left: 1em; }
+[data-sfc="compare-slider"] .sfc-cmp-tag-after { right: 1em; background: var(--sfc-surface); }

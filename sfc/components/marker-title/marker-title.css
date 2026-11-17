@@ -1,0 +1,38 @@
+/* marker-title: a hero title (AvantGarde Demi) with a marker stroke under one phrase. Tokens only. */
+[data-sfc="marker-title"] {
+  display: block;
+  color: var(--sfc-ink);
+}
+[data-sfc="marker-title"] .sfc-mt-title {
+  margin: 0;
+  font-family: var(--sfc-font-display);
+  font-weight: 600;
+  font-synthesis: none;
+  font-size: var(--sfc-mt-size, clamp(40px, 5.6vw, 104px));
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+[data-sfc="marker-title"] .sfc-mt-mark {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+/* The stroke sits under the marked words, a little wider than them, and never covers a letter. */
+[data-sfc="marker-title"] .sfc-mt-stroke {
+  position: absolute;
+  left: -3%;
+  width: 106%;
+  bottom: -0.2em;
+  height: 0.32em;
+  overflow: visible;
+  pointer-events: none;
+}
+[data-sfc="marker-title"] .sfc-mt-stroke path {
+  fill: none;
+  stroke: var(--sfc-mt-color, var(--sfc-accent));
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+}

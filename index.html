@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" data-sfc-medium="deck">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Mission Wealth: FSC Sales & Service Advanced investment proposal. One-take deck on sf-design-stack
+     (enablement-slides). Co-branded for this customer at the user's request: the customer's name only, no logo.
+     Intensity 2 (customer pricing: calm motion, data-travel="follow" on every slide).
+     CONFIDENTIAL: proposed pricing, subject to final quote. -->
+<meta name="sfc-intensity" content="2">
+<title>Mission Wealth · FSC Sales &amp; Service Advanced proposal</title>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var m = q.get('medium');
+    if (m === 'print' || m === 'deck') document.documentElement.dataset.sfcMedium = m;
+    if (q.get('motion') !== 'reduce' || !window.matchMedia) return;
+    var real = window.matchMedia.bind(window);
+    window.matchMedia = function (query) {
+      if (!/prefers-reduced-motion:\s*reduce/.test(query)) return real(query);
+      return { matches: true, media: query, onchange: null, addListener: function () {}, removeListener: function () {},
+        addEventListener: function () {}, removeEventListener: function () {}, dispatchEvent: function () { return false; } };
+    };
+  })();
+</script>
+<link rel="stylesheet" href="sfc/themes/brand-central.css">
+<link rel="stylesheet" href="sfc/components/camera-rig/camera-rig.css">
+<link rel="stylesheet" href="sfc/components/carry/carry.css">
+<!-- sfc-pack: paste the extra component <link> tags here -->
+<link rel="stylesheet" href="sfc/components/marker-title/marker-title.css">
+<link rel="stylesheet" href="sfc/components/compare-slider/compare-slider.css">
+<link rel="stylesheet" href="sfc/components/hub-spokes/hub-spokes.css">
+<link rel="stylesheet" href="sfc/components/bento-grid/bento-grid.css">
+<link rel="stylesheet" href="onetake-deck.css">
+<style>
+  body { font-family: var(--sfc-font-body); color: var(--sfc-ink); }
+
+  .slide {
+    padding: 150px 144px 72px;
+    display: flex; flex-direction: column; justify-content: center;
+    color: var(--sfc-ink);
+  }
+
+  .ground-evening { background: url("assets/gradient-evening-stretch.svg") 0 0 / 100% 125% no-repeat, #001E5B; }
+  .ground-dusk    { background: url("assets/gradient-dusk-stretch.svg") 0 0 / 100% 100% no-repeat, #022AC0; }
+  .ground-morning { background: url("assets/gradient-morning-stretch.svg") 0 0 / 100% 100% no-repeat, #EAF5FE; }
+
+  /* ================== TYPE ================== */
+  h1 { font: 600 107px / 1.03 var(--sfc-font-display); letter-spacing: -0.025em; max-width: 14ch; margin: 0; text-wrap: balance; }
+  h2 { font: 600 64px / 1.06 var(--sfc-font-display); letter-spacing: -0.02em; max-width: none; margin: 0 0 14px; text-wrap: balance; }
+  h3 { font: 600 29px / 1.2 var(--sfc-font-body); margin: 0 0 10px; }
+  p, li { font: 400 24px / 1.45 var(--sfc-font-body); margin: 0; }
+  .sub { font-weight: 300; font-size: 28px; margin-bottom: 40px; max-width: 60ch; }
+  .lede { margin-top: 28px; max-width: 36ch; font-weight: 300; font-size: 30px; }
+  .muted { color: var(--sfc-ink-muted); }
+  .note { margin-top: 30px; font-size: 20px; font-weight: 400; color: var(--sfc-ink-muted); max-width: 120ch; }
+
+  .eyebrow {
+    display: inline-block; width: fit-content;
+    margin-bottom: 28px; padding: 10px 18px;
+    border: 1px solid var(--sfc-surface-border); border-radius: 999px;
+    font: 600 18px / 1.2 var(--sfc-font-body); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .brand { position: absolute; top: 54px; left: 144px; height: 65px; width: auto; }
+  .slide-number {
+    position: absolute; top: 66px; right: 77px;
+    font: 600 18px / 1 var(--sfc-font-body); letter-spacing: 0.1em;
+    padding: 8px 12px; border-radius: 999px; background: var(--sfc-bg); color: var(--sfc-ink);
+  }
+  .sparkle { position: absolute; width: 115px; height: auto; pointer-events: none; }
+  .sparkle.small { width: 58px; }
+
+  /* Things that travel: boxes with a fill. */
+  .pill { display: inline-block; width: fit-content; margin-top: 44px; padding: 16px 28px; border-radius: 999px;
+    background: var(--sfc-ink); color: var(--sfc-bg); font: 600 22px / 1.2 var(--sfc-font-body); }
+  .chip { display: inline-block; width: fit-content; margin-top: 22px; padding: 12px 20px; border-radius: 999px;
+    background: var(--sfc-accent-2); color: #FFFFFF; font: 600 20px / 1.2 var(--sfc-font-body); }
+
+  .card { background: var(--sfc-bg); border: 1px solid var(--sfc-surface-border); border-radius: var(--sfc-radius);
+    padding: 36px; box-shadow: var(--sfc-shadow); }
+  .panel { background: var(--sfc-bg); border-radius: 28px; padding: 48px 56px; box-shadow: var(--sfc-shadow); }
+  .tile { background: var(--sfc-surface); border-radius: 24px; padding: 30px 34px; }
+  .label { font: 600 18px / 1.2 var(--sfc-font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--sfc-accent); margin-bottom: 12px; }
+  [data-sfc-surface="dark"] .label { color: var(--sfc-ink-muted); }
+  .num { font: 600 64px / 1 var(--sfc-font-display); letter-spacing: -0.02em; }
+  .num.lg { font-size: 96px; }
+  .big-num { font: 600 200px / 0.9 var(--sfc-font-display); letter-spacing: -0.04em; color: var(--sfc-accent-2); }
+
+  /* Component text never below 18 px on a projector. */
+  .slide [data-sfc="compare-slider"], .slide [data-sfc="hub-spokes"], .slide [data-sfc="chart-area"] { font-size: 24px; }
+  .slide [data-sfc="compare-slider"] { width: 100%; max-width: none; }
+  .slide [data-sfc="chart-area"] .sfc-title { font-size: 30px; }
+
+  .form-panel { position: relative; aspect-ratio: 202 / 215; width: 100%; display: grid; place-items: center; }
+  .form-panel > .form { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* ================== 1 cover ================== */
+  .title-layout { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: 96px; align-items: center; }
+  .astro-panel { max-width: 540px; }
+  .astro-panel .subject { position: relative; width: 84%; height: auto; margin-top: -8%; }
+  .cover-title { --sfc-mt-size: 104px; --sfc-mt-color: var(--sfc-accent); }
+
+  /* ================== 2 today ================== */
+  .grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+  .grid4 .card .num { font-size: 52px; margin: 6px 0 14px; }
+  .total-band { margin-top: 36px; display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; }
+  .total-band .num { color: var(--sfc-accent-2); }
+  .total-band .chip { margin-top: 0; }
+
+  /* ================== 3 at a glance ================== */
+  .glance { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 40px; align-items: stretch; }
+  .glance .panel p { font-size: 30px; line-height: 1.45; font-weight: 300; }
+  .glance .panel .label { margin-bottom: 18px; }
+  .stats2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .stats2x2 .tile p { margin-top: 10px; }
+
+  /* ================== 4 ramp ================== */
+  .ramp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; align-items: end; }
+  .ramp .step { display: flex; flex-direction: column; align-items: stretch; }
+  .ramp .step .num { color: var(--sfc-ink); }
+  .ramp .bar { margin-top: 18px; border-radius: 14px 14px 0 0; background: var(--sfc-accent); }
+  .ramp .bar.final { background: var(--sfc-accent-2); }
+  .ramp .add { margin-top: 18px; font: 600 20px / 1.2 var(--sfc-font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--sfc-accent); }
+  .ramp .date { font-size: 24px; color: var(--sfc-ink-muted); }
+  .ramp-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+  .ramp-foot .chip { margin-top: 0; }
+  .ramp-foot p { font-size: 22px; }
+
+  /* ================== 5 agreement ================== */
+  .agree { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.6fr); gap: 36px; align-items: start; }
+  .agree .panel { padding: 34px 40px; }
+  .tbl { display: grid; grid-template-columns: minmax(0, 2.4fr) 0.8fr 0.9fr 0.9fr; }
+  .tbl > div { padding: 13px 10px; font-size: 21px; line-height: 1.3; border-bottom: 1px solid var(--sfc-surface-border); }
+  .tbl .h { font-weight: 600; font-size: 18px; letter-spacing: .1em; text-transform: uppercase; color: var(--sfc-ink-muted); }
+  .tbl .r { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl .t { font-weight: 700; font-size: 24px; border-bottom: 0; padding-top: 18px; }
+  .row-fsc { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 2.4fr) 0.8fr 0.9fr 0.9fr;
+    background: var(--sfc-surface); border-radius: 12px; }
+  .row-fsc > span { padding: 13px 10px; font-size: 21px; font-weight: 600; }
+  .row-fsc > span.r { text-align: right; }
+  .side-stats { display: flex; flex-direction: column; gap: 20px; }
+  .side-stats .tile .num { font-size: 52px; margin: 2px 0 6px; }
+  .side-stats .tile p { font-size: 21px; }
+
+  /* ================== 6 rate ================== */
+  .rate { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 48px; align-items: center; }
+  .rate .panel { padding: 28px; }
+  .save-card { background: var(--sfc-accent-2); color: #FFFFFF; border-radius: 28px; padding: 44px; }
+  .save-card .num { font-size: 120px; }
+  .save-card p { font-size: 26px; margin-top: 14px; }
+
+  /* ================== 7 chart ================== */
+  .chartwrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr); gap: 40px; align-items: center; }
+  .chartwrap .panel { padding: 24px; }
+  .chart-stats { display: flex; flex-direction: column; gap: 22px; }
+  .chart-stats .tile .num { font-size: 56px; margin-bottom: 6px; }
+
+  /* ================== 8 three years ================== */
+  .three { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 72px; align-items: center; }
+  .three .lede { margin-top: 18px; }
+  .bars .barrow { margin-bottom: 34px; }
+  .bars .barrow p { font-weight: 600; margin-bottom: 10px; }
+  .hbar { height: 92px; border-radius: 16px; display: flex; align-items: center; justify-content: flex-end; padding: 0 28px;
+    font: 600 44px / 1 var(--sfc-font-display); }
+  .hbar.ramp-bar { background: var(--sfc-accent-2); color: #FFFFFF; width: 94.8%; }
+  .hbar.bayg-bar { background: var(--sfc-surface); color: var(--sfc-ink); width: 100%; }
+  .bars .panel p.muted { font-size: 21px; }
+
+  /* ================== 9 terms ================== */
+  .terms { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 40px; align-items: center; }
+  .terms .panel { padding: 28px 32px; }
+  .term-cards { display: flex; flex-direction: column; gap: 20px; }
+  .term-cards .tile h3 { margin-bottom: 6px; }
+  .term-cards .tile p { font-size: 22px; }
+
+  /* ================== 10 adds ================== */
+  .adds-panel { padding: 34px; }
+  .adds-panel [data-sfc="bento-grid"] { --sfc-bento-row: minmax(240px, auto); }
+  .adds-panel [data-sfc="bento-grid"] > article { justify-content: flex-start; }
+  .adds-panel article h3 { font-size: 28px; color: var(--sfc-accent-2); margin-bottom: 16px; }
+  .adds-panel article ul { margin: 0; padding-left: 26px; }
+  .adds-panel article li { font-size: 23px; margin-bottom: 10px; }
+  .adds-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; }
+  .adds-foot .chip { margin-top: 0; }
+
+  /* ================== 11 protect ================== */
+  .prot4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  .prot4 .tile p { font-size: 22px; }
+  .why { margin-top: 30px; display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 40px; align-items: center; }
+  .why .panel p { font-size: 26px; font-weight: 300; }
+  .icon-card { max-width: 260px; }
+  .icon-card .subject { position: relative; width: 70%; height: auto; margin-top: -10%; }
+
+  /* ================== 12 ready ================== */
+  .ready-band { display: flex; justify-content: space-between; align-items: center; gap: 40px; margin-bottom: 34px; }
+  .ready-band .num { font-size: 52px; color: var(--sfc-accent-2); }
+  .ready-band p { font-size: 26px; }
+  .ready-band .chip { margin-top: 0; flex: none; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+
+  /* ================== 13 path ================== */
+  .path-panel { padding: 50px 56px; background: var(--sfc-surface); }
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px; position: relative; }
+  .steps::before { content: ""; position: absolute; left: 32px; right: 32px; top: 94px; height: 4px; background: var(--sfc-accent); border-radius: 2px; }
+  .step-date { font: 600 40px / 1 var(--sfc-font-display); margin-bottom: 24px; }
+  .dot { position: relative; width: 64px; height: 64px; border-radius: 50%; background: var(--sfc-bg); color: var(--sfc-ink);
+    display: grid; place-items: center; font: 700 26px / 1 var(--sfc-font-body); margin-bottom: 22px; border: 4px solid var(--sfc-accent); }
+  .steps p.step-txt { font-size: 24px; }
+  .ask { margin-top: 36px; display: flex; align-items: center; gap: 32px; }
+  .ask img { width: 120px; height: auto; flex: none; }
+  .ask p { font-size: 30px; font-weight: 300; }
+  .ask strong { font-weight: 600; }
+
+  /* 7: spend chart, inline SVG drawn from the cost model (see PROGRESS.md) */
+  .legend { display: flex; gap: 36px; margin: 8px 0 10px 12px; }
+  .legend span { font: 600 21px / 1.2 var(--sfc-font-body); display: inline-flex; align-items: center; gap: 12px; }
+  .legend i { display: inline-block; width: 34px; height: 6px; border-radius: 3px; }
+  .k-ramp { background: var(--sfc-accent); } .k-bayg { background: var(--sfc-warn); }
+  svg.spend { display: block; width: 100%; height: auto; }
+  svg.spend .grid { stroke: var(--sfc-surface-border); stroke-width: 1; }
+  svg.spend .ax { fill: var(--sfc-ink-muted); font: 400 20px var(--sfc-font-body); }
+  svg.spend .yr { font-weight: 600; font-size: 18px; }
+  svg.spend .zone { fill: var(--sfc-surface); opacity: .55; }
+  svg.spend .zone-t { fill: var(--sfc-ink); font: 600 20px var(--sfc-font-body); }
+  svg.spend .l-ramp { fill: none; stroke: var(--sfc-accent); stroke-width: 6; stroke-linejoin: round; }
+  svg.spend .l-bayg { fill: none; stroke: var(--sfc-warn); stroke-width: 6; stroke-linejoin: round; }
+  svg.spend .d-ramp { fill: var(--sfc-accent); } svg.spend .d-bayg { fill: var(--sfc-warn); }
+  .chart-note { font-size: 20px; margin: 6px 12px 4px; }
+  /* hub: room for a two-line label */
+  .slide [data-sfc="hub-spokes"] .sfc-hs-hub { width: 24%; }
+  .slide [data-sfc="hub-spokes"] .sfc-hs-hub .sfc-hs-plate { padding: .5em; }
+  .slide [data-sfc="hub-spokes"] .sfc-hs-hub .sfc-hs-label { font-size: 1.05em; overflow-wrap: normal; }
+  /* bento: always four across on the 1920 stage (its own breakpoint reads the window, not the stage) */
+  .slide [data-sfc="bento-grid"] { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+</style>
+</head>
+<body>
+<div class="frame" id="frame" role="region" aria-roledescription="slide deck" aria-label="Mission Wealth investment proposal">
+  <div id="view">
+    <div id="grounds" aria-hidden="true"></div>
+    <div id="rig">
+      <div id="world" class="sfc-stage">
+
+        <!-- 1 COVER. Pill "Where you are today" grows into slide 2's total band. -->
+        <section class="slide ground-evening" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 1">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <img class="sparkle" src="assets/sparkles-yellow-main-web.webp" alt="" aria-hidden="true" style="top: 130px; right: 134px;">
+          <img class="sparkle small" src="assets/sparkles-blue-inclined-web.webp" alt="" aria-hidden="true" style="top: 238px; right: 250px;">
+          <div class="title-layout">
+            <div class="form-panel astro-panel"><img class="form" src="assets/subtract-3.svg" alt=""><img class="subject" src="assets/astro-sf-3d-10.png" alt=""></div>
+            <div>
+              <p class="eyebrow">Investment proposal &middot; November 2026</p>
+              <div class="cover-title" data-sfc="marker-title" data-sfc-opts='{"title":"FSC Sales & Service Advanced","mark":"Advanced","level":"h1"}'></div>
+              <p class="lede">An investment proposal for Mission Wealth</p>
+              <span class="pill" data-carry="today">Start with where you are today</span>
+            </div>
+          </div>
+          <div class="slide-number">01</div>
+        </section>
+
+        <!-- 2 TODAY. Total band is the target; its chip carries into slide 3's recommendation. -->
+        <section class="slide ground-morning" data-sfc-surface="light" data-travel="follow" aria-label="Slide 2">
+          <img class="brand" src="assets/salesforce-cloud-primary-blue.svg" alt="Salesforce">
+          <h2>Your investment today</h2>
+          <p class="sub muted">Four contracts, each with its own invoice and renewal date</p>
+          <div class="grid4">
+            <div class="card"><p class="label">Core CRM</p><p class="num">$636,590</p><p class="muted">244 FSC Unlimited seats, security add-ons and analytics</p></div>
+            <div class="card"><p class="label">Marketing Cloud</p><p class="num">$46,758</p><p class="muted">Account Engagement Advanced and Premier Success</p></div>
+            <div class="card"><p class="label">Own backup</p><p class="num">$6,720</p><p class="muted">Backup &amp; Recover on Azure</p></div>
+            <div class="card"><p class="label">MuleSoft</p><p class="num">$2,376</p><p class="muted">Two Dataloader.io licenses</p></div>
+          </div>
+          <div class="panel total-band" data-carry="today">
+            <p class="num lg">$692,444</p>
+            <p>a year today, on four contracts with separate invoices and renewal dates</p>
+            <span class="chip" data-carry="proposal">See the proposal</span>
+          </div>
+          <div class="slide-number">02</div>
+        </section>
+
+        <!-- 3 AT A GLANCE. Recommendation panel is the target; the "300 seats" tile carries into the ramp. -->
+        <section class="slide ground-dusk" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 3">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <h2>The proposal at a glance</h2>
+          <p class="sub">Built around the roughly 300 users Mission Wealth expects by the end of 2027</p>
+          <div class="glance">
+            <div class="panel" data-carry="proposal">
+              <p class="label">Our recommendation</p>
+              <p>Upgrade to FSC Sales &amp; Service Advanced and ramp to 300 seats by February 2027 on one agreement, with every seat at the same lower rate. Marketing Cloud, MuleSoft and Own are bundled in at a lower cost.</p>
+            </div>
+            <div class="stats2x2">
+              <div class="tile"><p class="num">$214.20</p><p>per seat per month, down from $225.43 today</p></div>
+              <div class="tile" data-carry="ramp"><p class="num">300 seats</p><p>by February 2027, on a ramped purchasing schedule</p></div>
+              <div class="tile"><p class="num">4 &rarr; 1</p><p>contracts, with one renewal date</p></div>
+              <div class="tile"><p class="num">3 years</p><p>of locked pricing, then a 5% renewal cap</p></div>
+            </div>
+          </div>
+          <div class="slide-number">03</div>
+        </section>
+
+        <!-- 4 RAMP. Ramp panel is the target; its chip carries into the agreement table. -->
+        <section class="slide ground-morning" data-sfc-surface="light" data-travel="follow" aria-label="Slide 4">
+          <img class="brand" src="assets/salesforce-cloud-primary-blue.svg" alt="Salesforce">
+          <h2>Proposed ramp to 300 seats</h2>
+          <p class="sub muted">FSC Sales &amp; Service Advanced, with every seat at $214.20 per user per month</p>
+          <div class="panel" data-carry="ramp">
+            <div class="ramp">
+              <div class="step"><p class="num">260</p><p class="muted">seats</p><div class="bar" style="height: 225px"></div><p class="add">+16 seats</p><p class="date">Nov 30, 2026</p></div>
+              <div class="step"><p class="num">275</p><p class="muted">seats</p><div class="bar" style="height: 238px"></div><p class="add">+15 seats</p><p class="date">Dec 15, 2026</p></div>
+              <div class="step"><p class="num">290</p><p class="muted">seats</p><div class="bar" style="height: 251px"></div><p class="add">+15 seats</p><p class="date">Jan 15, 2027</p></div>
+              <div class="step"><p class="num">300</p><p class="muted">seats</p><div class="bar final" style="height: 260px"></div><p class="add">+10 seats</p><p class="date">Feb 15, 2027</p></div>
+            </div>
+            <div class="ramp-foot">
+              <p class="muted">Seats past 300 are added at the same rate. Proposed pricing, subject to final quote.</p>
+              <span class="chip" data-carry="agreement">The agreement at 300 seats</span>
+            </div>
+          </div>
+          <div class="slide-number">04</div>
+        </section>
+
+        <!-- 5 AGREEMENT. Table panel is the target; the FSC row carries into the rate comparison. -->
+        <section class="slide ground-evening" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 5">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <h2>The proposed agreement</h2>
+          <p class="sub muted">Annual cost once the ramp reaches 300 seats</p>
+          <div class="agree">
+            <div class="panel" data-carry="agreement">
+              <div class="tbl">
+                <div class="h">Product</div><div class="h r">Quantity</div><div class="h r">Per seat, monthly</div><div class="h r">Annual</div>
+                <div class="row-fsc" data-carry="rate"><span>FSC Sales &amp; Service Advanced</span><span class="r">300 seats</span><span class="r">$178.50</span><span class="r">$642,600</span></div>
+                <div>Salesforce Shield</div><div class="r">Org</div><div class="r">$26.78</div><div class="r">$96,390</div>
+                <div>Data Mask</div><div class="r">Org</div><div class="r">$8.93</div><div class="r">$32,130</div>
+                <div>Marketing Cloud Account Engagement Advanced</div><div class="r">1</div><div class="r">&mdash;</div><div class="r">$26,400</div>
+                <div>Premier Success, Marketing Cloud</div><div class="r">1</div><div class="r">&mdash;</div><div class="r">$3,960</div>
+                <div>MuleSoft Dataloader.io Pro</div><div class="r">2</div><div class="r">&mdash;</div><div class="r">$1,152</div>
+                <div>Security Center, Data Detect, Backup &amp; Recover, Archive</div><div class="r">Included</div><div class="r">&mdash;</div><div class="r">$0</div>
+                <div class="t">Total at 300 seats</div><div class="t"></div><div class="t"></div><div class="t r">$802,632</div>
+              </div>
+            </div>
+            <div class="side-stats">
+              <div class="tile"><p class="label">36-month term</p><p>Nov 15, 2026 to Nov 14, 2029</p></div>
+              <div class="tile"><p class="label">Total over the term</p><p class="num">$2.39M</p><p>including the ramp</p></div>
+              <div class="tile"><p class="label">One agreement</p><p>Replaces the core, Marketing Cloud, Own and MuleSoft contracts</p></div>
+            </div>
+          </div>
+          <p class="note">Shield and Data Mask are priced on license spend. Proposed pricing, subject to final quote.</p>
+          <div class="slide-number">05</div>
+        </section>
+
+        <!-- 6 RATE. The FSC row grows into the comparison panel; the savings card carries into the chart. -->
+        <section class="slide ground-morning" data-sfc-surface="light" data-travel="follow" aria-label="Slide 6">
+          <img class="brand" src="assets/salesforce-cloud-primary-blue.svg" alt="Salesforce">
+          <h2>A lower rate for every seat</h2>
+          <p class="sub muted">Per seat per month, including FSC and security add-ons</p>
+          <div class="rate">
+            <div class="panel" data-carry="rate">
+              <div data-sfc="compare-slider" data-sfc-opts='{
+                "title": "Per seat per month, today and with Advanced",
+                "before": {"label": "Today", "title": "$225.43", "rows": [
+                  {"label": "FSC Unlimited", "value": "Included"},
+                  {"label": "Shield", "value": "Included"},
+                  {"label": "Security Center", "value": "Included"},
+                  {"label": "Data Mask", "value": "Included"}]},
+                "after": {"label": "With Advanced", "title": "$214.20", "rows": [
+                  {"label": "FSC Advanced", "value": "$178.50", "status": "good"},
+                  {"label": "Shield and Data Mask", "value": "$35.70", "status": "good"},
+                  {"label": "Security Center", "value": "Included", "status": "good"}]}
+              }'></div>
+            </div>
+            <div class="save-card" data-carry="chart">
+              <p class="num">$11.23</p>
+              <p>less per seat each month: about $40K a year at 300 seats, locked through November 2029</p>
+            </div>
+          </div>
+          <div class="slide-number">06</div>
+        </section>
+
+        <!-- 7 SPEND OVER TIME. Chart panel is the target; the "$14.5K ahead" tile carries into slide 8. -->
+        <section class="slide ground-dusk" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 7">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <h2>Lower spend from June 2027</h2>
+          <p class="sub">Total monthly Salesforce spend: the ramp vs. buying 5 seats a month as you go</p>
+          <div class="chartwrap">
+            <div class="panel" data-carry="chart">
+              <div class="legend"><span><i class="k-ramp"></i>With the ramp</span><span><i class="k-bayg"></i>Buy as you go, 5 seats a month</span></div>
+              <svg class="spend" viewBox="0 0 1040 500" role="img" aria-label="Monthly Salesforce spend, Nov 2026 to Dec 2027. The ramp rises to $66.9K a month by February 2027 and stays flat. Buy as you go rises 5 seats a month to $72.3K. Buy as you go costs more every month from June 2027."><line class="grid" x1="86" x2="1020" y1="389.77777777777777" y2="389.77777777777777"/><text class="ax" x="72" y="396.77777777777777" text-anchor="end">$58K</text><line class="grid" x1="86" x2="1020" y1="297.3333333333333" y2="297.3333333333333"/><text class="ax" x="72" y="304.3333333333333" text-anchor="end">$62K</text><line class="grid" x1="86" x2="1020" y1="204.88888888888889" y2="204.88888888888889"/><text class="ax" x="72" y="211.88888888888889" text-anchor="end">$66K</text><line class="grid" x1="86" x2="1020" y1="112.44444444444444" y2="112.44444444444444"/><text class="ax" x="72" y="119.44444444444444" text-anchor="end">$70K</text><line class="grid" x1="86" x2="1020" y1="20" y2="20"/><text class="ax" x="72" y="27" text-anchor="end">$74K</text><rect class="zone" x="588.9230769230769" y="20" width="431.0769230769231" height="416"/><text class="zone-t" x="602.9230769230769" y="50">Ramp lower every month</text><path class="l-bayg" d="M86.0 351.4 L157.8 325.4 L229.7 299.3 L301.5 273.3 L373.4 247.2 L445.2 221.2 L517.1 195.1 L588.9 169.1 L660.8 143.0 L732.6 117.0 L804.5 90.9 L876.3 64.9 L948.2 59.7 L1020.0 59.7"/><path class="l-ramp" d="M86.0 382.4 L157.8 308.2 L229.7 233.9 L301.5 184.4 L373.4 184.4 L445.2 184.4 L517.1 184.4 L588.9 184.4 L660.8 184.4 L732.6 184.4 L804.5 184.4 L876.3 184.4 L948.2 184.4 L1020.0 184.4"/><text class="ax" x="86" y="470" text-anchor="middle">Nov</text><text class="ax" x="157.84615384615384" y="470" text-anchor="middle">Dec</text><text class="ax" x="229.69230769230768" y="470" text-anchor="middle">Jan</text><text class="ax" x="301.53846153846155" y="470" text-anchor="middle">Feb</text><text class="ax" x="373.38461538461536" y="470" text-anchor="middle">Mar</text><text class="ax" x="445.2307692307692" y="470" text-anchor="middle">Apr</text><text class="ax" x="517.0769230769231" y="470" text-anchor="middle">May</text><text class="ax" x="588.9230769230769" y="470" text-anchor="middle">Jun</text><text class="ax" x="660.7692307692307" y="470" text-anchor="middle">Jul</text><text class="ax" x="732.6153846153846" y="470" text-anchor="middle">Aug</text><text class="ax" x="804.4615384615385" y="470" text-anchor="middle">Sep</text><text class="ax" x="876.3076923076923" y="470" text-anchor="middle">Oct</text><text class="ax" x="948.1538461538462" y="470" text-anchor="middle">Nov</text><text class="ax" x="1020" y="470" text-anchor="middle">Dec</text><text class="ax yr" x="86" y="496" text-anchor="start">2026</text><text class="ax yr" x="229.69230769230768" y="496" text-anchor="start">2027</text><circle class="d-ramp" cx="1020" cy="184.41244444444445" r="8"/><circle class="d-bayg" cx="1020" cy="59.67022222222222" r="8"/></svg>
+              <p class="muted chart-note">Total monthly Salesforce spend, Nov 2026 to Dec 2027. The ramp adds seats sooner, so it costs more until May 2027.</p>
+            </div>
+            <div class="chart-stats">
+              <div class="tile"><p class="num">June 2027</p><p>lower every month from here on</p></div>
+              <div class="tile" data-carry="total"><p class="num">$14.5K</p><p>ahead by December 2027</p></div>
+              <div class="tile"><p class="num">$5.4K</p><p>less a month at 300 seats</p></div>
+            </div>
+          </div>
+          <div class="slide-number">07</div>
+        </section>
+
+        <!-- 8 THREE YEARS (hero). The tile grows into the bars panel; the ramp bar carries into the terms hub. -->
+        <section class="slide ground-morning" data-sfc-surface="light" data-travel="follow" data-shake aria-label="Slide 8">
+          <img class="brand" src="assets/salesforce-cloud-primary-blue.svg" alt="Salesforce">
+          <img class="sparkle small" src="assets/sparkles-dark-blue-main-web.webp" alt="" aria-hidden="true" style="top: 150px; right: 120px;">
+          <div class="three">
+            <div>
+              <p class="eyebrow">Over the 36-month term</p>
+              <p class="big-num" data-in="num">$133K</p>
+              <p class="lede">less over three years with the ramp. Both paths reach 300 seats; the ramp gets there sooner, at a lower rate, on one contract.</p>
+            </div>
+            <div class="panel bars" data-carry="total">
+              <p class="label">Total Salesforce spend, Nov 2026 to Nov 2029</p>
+              <div class="barrow"><p>With the ramp</p><div class="hbar ramp-bar" data-carry="terms">$2.39M</div></div>
+              <div class="barrow"><p>Buy as you go</p><div class="hbar bayg-bar">$2.52M</div></div>
+              <p class="muted">Buy as you go adds 5 seats a month to 300 at $225.43, with today's Marketing Cloud, Own and MuleSoft costs. Excludes renewal uplifts on today's contracts.</p>
+            </div>
+          </div>
+          <div class="slide-number">08</div>
+        </section>
+
+        <!-- 9 TERMS. The ramp bar becomes the one-agreement hub panel; "Room to grow" carries into slide 10. -->
+        <section class="slide ground-evening" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 9">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <h2>Terms that keep costs predictable</h2>
+          <p class="sub muted">One agreement, one renewal date, and pricing you can plan around</p>
+          <div class="terms">
+            <div class="panel" data-carry="terms">
+              <div data-sfc="hub-spokes" data-sfc-opts='{"hub":{"label":"One agreement"},"sources":[{"label":"Core CRM"},{"label":"Marketing Cloud"},{"label":"Own backup"},{"label":"MuleSoft"}],"caption":"Four contracts become one invoice schedule and one renewal date."}'></div>
+            </div>
+            <div class="term-cards">
+              <div class="tile"><h3>36-month term</h3><p>November 15, 2026 to November 14, 2029</p></div>
+              <div class="tile"><h3>Locked pricing</h3><p>Renewal uplift capped at 5%, down from 7% on your core contract today</p></div>
+              <div class="tile" data-carry="adds"><h3>Room to grow</h3><p>Seats past 300 added at the same per-seat rate</p></div>
+            </div>
+          </div>
+          <p class="note">Tableau Cloud and partner apps stay on their current contracts. Proposed terms, subject to final quote and order form.</p>
+          <div class="slide-number">09</div>
+        </section>
+
+        <!-- 10 WHAT ADVANCED ADDS. "Room to grow" grows into the bento panel; its chip carries into slide 11. -->
+        <section class="slide ground-morning" data-sfc-surface="light" data-travel="follow" aria-label="Slide 10">
+          <img class="brand" src="assets/salesforce-cloud-primary-blue.svg" alt="Salesforce">
+          <h2>What Advanced adds for your team</h2>
+          <p class="sub muted">Included with every seat, on top of everything in Unlimited today</p>
+          <div class="panel adds-panel" data-carry="adds">
+            <div data-sfc="bento-grid" data-sfc-opts='{"cols":4,"from":"start"}'>
+              <article><h3>Protect client data</h3><ul><li>Security Center</li><li>Data Detect</li><li>Backup &amp; Recover and Archive</li></ul></article>
+              <article><h3>Help advisors work faster</h3><ul><li>Sales Insights and Account Research</li><li>Sales Emails</li><li>Customer Signals Intelligence</li></ul></article>
+              <article><h3>AI on your timeline</h3><ul><li>1M Flex Credits a year</li><li>Tableau Next with Tableau Agent</li><li>Slack Business+ with Slackbot</li></ul></article>
+              <article><h3>Room to grow</h3><ul><li>1GB of data storage per user</li><li>Sales Programs</li><li>Premier Success and Full Sandbox continue</li></ul></article>
+            </div>
+            <div class="adds-foot">
+              <p class="muted">Four groups of capabilities, one seat price</p>
+              <span class="chip" data-carry="protect">Start with client data</span>
+            </div>
+          </div>
+          <div class="slide-number">10</div>
+        </section>
+
+        <!-- 11 PROTECTION. The chip grows into the "why it matters now" panel; its chip carries into slide 12. -->
+        <section class="slide ground-dusk" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 11">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <h2>Built-in protection for client data</h2>
+          <p class="sub">Security and data tools that come with Advanced, alongside Shield and Data Mask</p>
+          <div class="prot4">
+            <div class="tile"><h3>Security Center</h3><p>Monitor security settings and user permissions across your org in one place.</p></div>
+            <div class="tile"><h3>Data Detect</h3><p>Find and classify sensitive client data, like account numbers, wherever it lives.</p></div>
+            <div class="tile"><h3>Backup &amp; Recover</h3><p>Automated backups of your Salesforce data and files, replacing the separate Own contract.</p></div>
+            <div class="tile"><h3>Archive</h3><p>Keep older records accessible for retention policies while freeing up storage.</p></div>
+          </div>
+          <div class="why">
+            <div class="panel" data-carry="protect">
+              <p class="label">Why it matters now</p>
+              <p>As your new cybersecurity specialist reviews vendors and AI tools, Advanced gives that work a stronger starting point: see where sensitive client data lives, review permissions in one place, and recover quickly if something goes wrong.</p>
+              <span class="chip" data-carry="ready">What can wait until you're ready</span>
+            </div>
+            <div class="form-panel icon-card"><img class="form" src="assets/subtract-7.svg" alt=""><img class="subject" src="assets/acceleration-3d-storytelling-icon-preview-1.png" alt=""></div>
+          </div>
+          <div class="slide-number">11</div>
+        </section>
+
+        <!-- 12 READY WHEN YOU ARE. The chip grows into the statement band; its chip carries into the path. -->
+        <section class="slide ground-morning" data-sfc-surface="light" data-travel="follow" aria-label="Slide 12">
+          <img class="brand" src="assets/salesforce-cloud-primary-blue.svg" alt="Salesforce">
+          <h2>Ready when you are</h2>
+          <p class="sub muted">Included capabilities stay available until your team chooses to turn them on</p>
+          <div class="panel ready-band" data-carry="ready">
+            <div>
+              <p class="num">Nothing to roll out on day one.</p>
+              <p class="muted">Plan adoption into your 2027 roadmap with your new hires.</p>
+            </div>
+            <span class="chip" data-carry="path">The path to November 15</span>
+          </div>
+          <div class="grid3">
+            <div class="card"><h3>Slack Business+ with Slackbot</h3><p class="muted">Pilot with your internal team when it fits your 2027 roadmap.</p></div>
+            <div class="card"><h3>Tableau Next</h3><p class="muted">Explore AI-assisted analytics alongside your current Tableau Cloud.</p></div>
+            <div class="card"><h3>1M Flex Credits a year</h3><p class="muted">Start testing AI and Data 360 use cases at your own pace.</p></div>
+          </div>
+          <div class="slide-number">12</div>
+        </section>
+
+        <!-- 13 PATH (close). The chip grows into the timeline panel. The last slide lands with the engine's shake. -->
+        <section class="slide ground-evening" data-sfc-surface="dark" data-travel="follow" aria-label="Slide 13">
+          <img class="brand" src="assets/salesforce-cloud-primary.svg" alt="Salesforce">
+          <img class="sparkle" src="assets/sparkles-yellow-main-web.webp" alt="" aria-hidden="true" style="top: 120px; right: 150px;">
+          <h2>The path to November 15</h2>
+          <p class="sub muted">A proposed plan to start Advanced on November 15, 2026</p>
+          <div class="panel path-panel" data-carry="path">
+            <div class="steps">
+              <div><p class="step-date">Nov 9</p><div class="dot">1</div><p class="step-txt">Review the proposal together</p></div>
+              <div><p class="step-date">By Nov 11</p><div class="dot">2</div><p class="step-txt">Confirm the seat plan and ramp dates</p></div>
+              <div><p class="step-date">By Nov 13</p><div class="dot">3</div><p class="step-txt">Order form and signature</p></div>
+              <div><p class="step-date">Nov 15</p><div class="dot">4</div><p class="step-txt">Advanced goes live; ramp steps follow on Dec 15, Jan 15 and Feb 15</p></div>
+            </div>
+          </div>
+          <div class="ask">
+            <img src="assets/hand-hand-shake-1.png" alt="">
+            <p><strong>Our ask:</strong> a working session early next week to review the ramp and confirm seat counts.</p>
+          </div>
+          <div class="slide-number">13</div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+  <div class="hud-bar" id="hud-bar" aria-hidden="true"></div>
+  <p class="sr-only" id="hud-live" aria-live="polite"></p>
+</div>
+
+<script src="sfc/vendor/gsap.min.js"></script>
+<script src="sfc/vendor/Flip.min.js"></script>
+<script src="sfc/sfc.js"></script>
+<script src="sfc/components/camera-rig/camera-rig.js"></script>
+<script src="sfc/components/carry/carry.js"></script>
+<!-- sfc-pack: paste the extra component <script> tags here -->
+<script src="sfc/components/marker-title/marker-title.js"></script>
+<script src="sfc/components/compare-slider/compare-slider.js"></script>
+<script src="sfc/components/hub-spokes/hub-spokes.js"></script>
+<script src="sfc/components/bento-grid/bento-grid.js"></script>
+<script src="onetake-deck.js"></script>
+</body>
+</html>
